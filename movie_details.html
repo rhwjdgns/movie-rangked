@@ -38,14 +38,6 @@
             <p id="movie-cast"></p>
         </div>
     </div>
-    <script src="movie_detail.js"></script>
-</body>
-
-</html>
-
-</head>
-
-<body>
     <div id="movie-details">
         <div id="poster-container"></div>
         <h1 id="movie-title"></h1>
@@ -54,10 +46,11 @@
         <p id="movie-runtime"></p>
         <p id="movie-cast"></p>
     </div>
-    <!-- 리뷰  -->
+    
+    <!-- 리뷰 입력 -->
     <div id="review_write">
         <div class="input-group mb-3">
-            <span class="input-group-text">제목</span>
+            <span class="input-group-text">이름</span>
             <input id="review_name" type="text" class="form-control" aria-label="Sizing example input"
                 aria-describedby="inputGroup-sizing-default">
         </div>
@@ -69,7 +62,7 @@
 
         <div class="input-group mb-3">
             <span class="input-group-text">비번</span>
-            <input id="review_password" type="text" class="form-control" aria-label="Sizing example input"
+            <input id="review_password" type="password" class="form-control" aria-label="Sizing example input"
                 aria-describedby="inputGroup-sizing-default">
         </div>
         <button onclick="record_review()" type="button" class="btn btn-dark">기록하기</button>
@@ -87,7 +80,6 @@
     </div>
 
     <a href="index.html">뒤로 가기</a>
-
     <script src="movie_detail.js"></script>
 </body>
 

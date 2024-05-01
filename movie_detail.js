@@ -103,36 +103,41 @@ window.onload = function () {
         })
         .catch(error => console.log('Error fetching movie details:', error));
 
-    make_review();
+    make_review(movieId);
 };
 
 //리뷰 이름 목록화하고 이름 순서대로 리뷰 생성
-function make_review() {
-    let review_name_list = localStorage.getItem("이름 목록").split(",");
+function make_review(movieId) {
+    let a = localStorage.getItem(movieId).split("&&");
+    let review_name_list = a.filter((item, pos) => a.indexOf(item) === pos);
     review_name_list.map((name) => {
-        let review_content_write = localStorage.getItem(name).split(",")[0];
-        let review_html = `<a href="#" class="list-group-item list-group-item-action">${name} : ${review_content_write}</a>`;
+        let review_name_write = name.split("&")[0];
+        let review_content_write = localStorage.getItem(name).split("&")[0];
+        let review_html = `<a href="#" class="list-group-item list-group-item-action">${review_name_write} : ${review_content_write}</a>`;
         let element = document.getElementById("review_list");
         element.innerHTML += review_html;
     });
 }
+
 //리뷰 적은 내용 스토리지에 저장 하고 새로고침
+
 function record_review() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const movieId = urlParams.get('id');
+
     let review_name = document.getElementById('review_name').value;
     let review_content = document.getElementById('review_content').value;
     let review_password = document.getElementById('review_password').value;
-    let name_list = localStorage.getItem("이름 목록");
+    let name_list = localStorage.getItem(movieId);
 
 
     if (name_list === null) {
-        localStorage.setItem("이름 목록", review_name);
-        localStorage.setItem(review_name, [review_content, review_password]);
+        localStorage.setItem(movieId, [review_name+"&"+movieId]);
+        localStorage.setItem(review_name+"&"+movieId, review_content+"&"+review_password);
     } else {
-        localStorage.setItem("이름 목록", name_list + "," + review_name);
-        localStorage.setItem(review_name, [review_content, review_password]);
+        localStorage.setItem(movieId, [name_list+"&&"+review_name+"&"+movieId]);
+        localStorage.setItem(review_name+"&"+movieId, review_content+"&"+review_password);
     }
 
-
     location.reload();
-
 }
