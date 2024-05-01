@@ -28,7 +28,6 @@ window.onload = function () {
             document.getElementById('poster-container').appendChild(poster);
 
             // 영화 출연진 정보를 가져오는 API 요청
-
             fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=a9ab6eb8181e52a08229ade55ea0a55e&language=en-US`)
                 .then(response => response.json())
                 .then(data => {
@@ -74,32 +73,5 @@ window.onload = function () {
 
             return fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=a9ab6eb8181e52a08229ade55ea0a55e&language=en-US`);
         })
-        .then(response => response.json())
-        .then(data => {
-            // 영화 출연진 정보 중에서 상위 몇 명만 가져와서 표시합니다.
-            const cast = data.cast.slice(0, 20);
-            const castList = document.getElementById('movie-cast');
-
-            cast.forEach(actor => {
-                // 각 배우의 상세 정보를 가져오는 API 요청
-                fetch(`https://api.themoviedb.org/3/person/${actor.id}?api_key=a9ab6eb8181e52a08229ade55ea0a55e&language=en-US`)
-                    .then(response => response.json())
-                    .then(actorData => {
-                        if (actorData.profile_path) {
-                            const actorImage = document.createElement("img");
-                            actorImage.src = "https://image.tmdb.org/t/p/w500" + actorData.profile_path;
-                            actorImage.alt = actorData.name + " 사진";
-                            castList.appendChild(actorImage);
-                        }
-
-                        // 배우의 이름과 역할을 표시합니다.
-                        const actorInfo = document.createElement("p");
-                        actorInfo.textContent = `${actorData.name} (${actor.character})`;
-                        castList.appendChild(actorInfo);
-                    })
-                    .catch(error => console.log('Error fetching actor details:', error));
-            });
-
-        })
-        .catch(error => console.log('Error fetching movie details:', error));
+        
 };
