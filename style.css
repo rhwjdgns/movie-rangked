@@ -1,14 +1,14 @@
 body {
-    background-color: rgb(19, 0, 0);    
+    background-color: rgb(19, 0, 0);
 }
 
 .cardbody {
-   background-color: rgb(0, 0, 0); 
+    background-color: rgb(0, 0, 0);
 }
 
 .card {
     width: 300px;
-    height: 850px;
+    height: 1050px;
     text-align: center;
     border: 0.2px solid rgb(155, 155, 155);
     border-radius: 10px;
@@ -17,7 +17,9 @@ body {
     margin-right: 30px;
     margin-left: 40px;
     margin-top: 50px;
-    justify-content: center; /* 수평으로 가운데 정렬 */
+    position: relative;
+    justify-content: center;
+    /* 수평으로 가운데 정렬 */
 }
 
 .card-img-top {
@@ -29,27 +31,70 @@ body {
 
 #mycards {
     display: flex;
-  flex-wrap: wrap; /* 자식 요소들이 넘치면 다음 줄로 내려가도록 설정 */
-  align-items: flex-start; /* 자식 요소들을 수직으로 상단에 정렬 */
-  
+    flex-wrap: wrap;
+    /* 자식 요소들이 넘치면 다음 줄로 내려가도록 설정 */
+    align-items: flex-start;
+    /* 자식 요소들을 수직으로 상단에 정렬 */
+
 }
 
-.card-text{
-    color:white;
+.card-text {
+    color: white;
     padding: 10px
 }
 
-.card-title{
-    color:white;
+.card-title {
+    color: white;
     font-size: 20px;
 }
 
-.card-average{
-    color:white;
+.card-average {
+    color: white;
+}
+
+.btn-primary {
+    display: inline-block; /* 인라인 블록으로 설정하여 요소가 수평으로 표시되도록 함 */
+    font-weight: 400; /* 폰트의 두께를 설정함 (400은 보통의 폰트 두께) */
+    color: #212529; /* 텍스트 색상을 설정함 */
+    text-align: center; /* 텍스트를 가운데 정렬함 */
+    vertical-align: middle; /* 요소를 수직으로 중앙 정렬함 */
+    cursor: pointer; /* 마우스 커서를 포인터 형태로 변경하여 클릭 가능한 요소임을 나타냄 */
+    background-color: transparent; /* 배경 색상을 투명으로 설정함 */
+    border: 1px solid transparent; /* 테두리 스타일을 설정함 */
+    padding: 0.375rem 0.75rem; /* 내부 여백을 설정함 */
+    font-size: 1rem; /* 폰트 크기를 설정함 (rem 단위를 사용하여 상대적인 크기를 지정함) */
+    line-height: 1.5; /* 줄 간격을 설정함 */
+    border-radius: 0.25rem; /* 테두리의 꼭지점을 둥글게 설정함 */
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; /* 전환 효과를 적용하여 요소 상태 변경 시 부드러운 애니메이션 효과를 부여함 */
+    color: #212529; /* 텍스트 색상을 다시 설정함 */
+    background-color: #ffc107; /* 배경 색상을 설정함 */
+    border-color: #ffc107; /* 테두리 색상을 설정함 */
+    display: inline-block; /* 인라인 블록으로 설정하여 텍스트가 수평으로 표시되도록 함 */
+    white-space: nowrap; /* 텍스트의 줄바꿈을 방지하여 수평으로 펴지도록 함 */
+    overflow: hidden; /* 내용이 넘칠 경우 숨김 처리 */
+    text-overflow: ellipsis; /* 내용이 넘칠 경우 생략 부호(...)로 표시 */
+    position: absolute; /* 위치를 부모 요소에 상대적으로 지정 */
+    bottom: 10px; /* 하단으로부터의 간격 조정 */
+    left: 50%; /* 가운데 정렬을 위해 부모 요소의 가로 중앙에 배치 */
+    transform: translateX(-50%); /* 가로 방향으로의 이동을 위한 가로 정렬 */
+}
+
+.btn-primary:hover {
+    color: #212529;
+    background-color: white;
+    border-color: white;
+}
+
+li {
+    color: white;
+}
+
+.cast-label {
+    color: yellow;
 }
 
 .form-floating {
-    color:rgb(207, 211, 0);
+    color: rgb(207, 211, 0);
     text-align: center;
 }
 
