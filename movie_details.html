@@ -1,23 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>영화 상세 정보</title>
-    
+    <link rel="stylesheet" href="movie_detail.css">
 </head>
+
 <body>
-    <div id="movie-details">
-        <div id="poster-container"></div>
-        <h1 id="movie-title"></h1>
-        <p id="movie-overview"></p>
-        <p id="movie-release-date"></p>
-        <p id="movie-runtime"></p>
-        <p id="movie-cast"></p>
+    <div class="backbtn">
+        <a href="index.html">메인페이지로 돌아가기</a>
     </div>
-
-    <a href="index.html">뒤로 가기</a>
-
+    <h1>영화 상제정보</h1>
+    <div class="main">
+        <div class="poster">
+            <div class="img" id="poster-container"></div>
+        </div>
+        <div class="movie_info">
+            <h2 id="movie-title"></h2>
+            <p id="movie-overview"></p>
+            <p id="movie-director"></p>
+            <p id="movie-release-date"></p>
+            <p id="movie-runtime"></p>
+            <p id="movie-genres"></p>
+            <p id="movie-rating"></p>
+        </div>
+        <div class="actor">
+            <h1>출연진</h1>
+            <p id="movie-cast"></p>
+        </div>
+    </div>
     <script src="movie_detail.js"></script>
 </body>
+
 </html>
