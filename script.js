@@ -55,8 +55,8 @@ function registerCardClickEvent() {
       // 카드에 설정된 데이터 속성인 'data-movie-id'를 사용하여 영화 ID를 가져옵니다.
       const movieId = this.getAttribute('data-movie-id');
 
-      // 가져온 영화 ID를 통해 원하는 작업을 수행합니다. 여기서는 간단히 alert 창을 띄웁니다.
-      alert(`movie ID: ${movieId}`);
+      // 해당 영화의 ID를 사용하여 새로운 페이지로 이동합니다.
+      window.location.href = 'movie_details.html?id=' + movieId;
     });
   });
 }
