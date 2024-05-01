@@ -7,6 +7,13 @@ const options = {
   }
 };
 
+// 영화 출연진 정보를 가져오는 함수
+function getCastDetails(movieId) {
+  return fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=a9ab6eb8181e52a08229ade55ea0a55e&language=en-US`)
+    .then(response => response.json())
+    .then(data => data.cast.slice(0, 5)) // 상위 5명의 출연진 정보만 가져옴
+}
+
 // 카드생성 함수
 function createMovieCard(movie) {
   const card = document.createElement("div");
@@ -33,6 +40,28 @@ function createMovieCard(movie) {
   voteAverage.classList.add("card-average");
   voteAverage.textContent = "평점: " + movie.vote_average;
 
+  const castLabel = document.createElement("p");
+  castLabel.classList.add("cast-label");
+  castLabel.textContent = "Actor";
+
+  const button = document.createElement("button");
+  button.textContent = "Additional Information";
+  button.classList.add("btn", "btn-primary");
+
+  const castList = document.createElement("ul");
+  castList.classList.add("cast-list");
+
+  // 영화 출연진 정보를 가져와서 카드에 추가합니다.
+  getCastDetails(movie.id)
+    .then(cast => {
+      movie.cast = cast;
+      cast.forEach(actor => {
+        const listItem = document.createElement("li");
+        listItem.textContent = actor.name;
+        castList.appendChild(listItem);
+      });
+    });
+
   card.dataset.movieId = movie.id;
 
   // 각 요소를 카드에 추가합니다.
@@ -41,6 +70,11 @@ function createMovieCard(movie) {
   card.appendChild(overview);
   card.appendChild(cardBody);
   card.appendChild(voteAverage);
+  card.appendChild(castLabel);
+  card.appendChild(castList);
+  card.appendChild(button);
+
+
 
   return card; // 생성된 카드를 반환합니다.
 }
@@ -63,7 +97,12 @@ function registerCardClickEvent() {
 
 function filterMovies(data, userInput, cardContainer) {
   // 검색어와 일치하는 영화만 필터링합니다.
-  const filterMovie = data.results.filter(movie => movie.title.toLowerCase().includes(userInput.toLowerCase()));
+  const filterMovie = data.results.filter(movie => {
+    const titleMatch = movie.title.toLowerCase().includes(userInput.toLowerCase());
+    const castMatch = movie.cast.some(actor => actor.name.toLowerCase().includes(userInput.toLowerCase()));
+    return titleMatch || castMatch;
+  });
+
   // 카드 컨테이너를 초기화합니다.
   cardContainer.innerHTML = '';
 
@@ -74,6 +113,8 @@ function filterMovies(data, userInput, cardContainer) {
   });
   registerCardClickEvent();
 }
+
+
 
 // API로부터 데이터를 가져오는 fetch 요청
 fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1&api_key=a9ab6eb8181e52a08229ade55ea0a55e')
