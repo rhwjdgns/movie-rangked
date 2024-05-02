@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
-
 <head>
     <!-- 부트 스트랩 CDN  -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -37,27 +35,11 @@
             <h1>출연진</h1>
             <p id="movie-cast"></p>
         </div>
+
     </div>
-    <script src="movie_detail.js"></script>
-
-    
-</body>
-
-</html>
-
-</head>
-
-<body>
-    <div id="movie-details">
-        <div id="poster-container"></div>
-        <h1 id="movie-title"></h1>
-        <p id="movie-overview"></p>
-        <p id="movie-release-date"></p>
-        <p id="movie-runtime"></p>
-        <p id="movie-cast"></p>
-    </div>
-    <!-- 리뷰  -->
+    <!-- 리뷰 작성 폼 -->
     <div id="review_write">
+        <h1>리뷰 작성하기</h1>
         <div class="input-group mb-3">
             <span class="input-group-text">제목</span>
             <input id="review_name" type="text" class="form-control" aria-label="Sizing example input"
@@ -77,9 +59,9 @@
         <button onclick="record_review()" type="button" class="btn btn-dark">기록하기</button>
     </div>
 
-    <br><br><br><br><br><br>
+    <br><br><br>
 
-    <!-- 리뷰  -->
+    <!-- 리뷰 리스트 -->
     <div>
         <div id="review_list" class="list-group">
             <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
@@ -87,9 +69,6 @@
             </a>
         </div>
     </div>
-
-    <a href="index.html">뒤로 가기</a>
-
     <script src="movie_detail.js"></script>
 </body>
 
