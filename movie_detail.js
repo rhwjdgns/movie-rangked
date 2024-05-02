@@ -19,6 +19,25 @@ window.onload = function () {
             const genres = data.genres.map(genre => genre.name).join(', ');
             document.getElementById('movie-genres').textContent = "장르: " + genres;
 
+            // 제작 국가 정보를 가져와서 표시합니다.
+            const countries = data.production_countries.map(country => country.name).join(', ');
+            document.getElementById('movie-countries').textContent = "제작 국가: " + countries;
+
+             // 관람 관객 수 정보를 가져와서 표시합니다. (TMDB API에는 해당 정보가 없을 수 있습니다.)
+        const revenue = data.revenue;
+        let audience;
+        if (revenue) {
+            if (revenue >= 100000000) {
+                audience = Math.round(revenue / 100000000) + "억 명";
+            } else if (revenue >= 10000000) {
+                audience = Math.round(revenue / 10000000) + "천만 명";
+            } else if (revenue >= 1000000) {
+                audience = Math.round(revenue / 1000000) + "백만 명";
+            }
+        } else {
+            audience = "정보 없음";
+        }
+        document.getElementById('movie-audience').textContent = "누적 관람 관객 수: " + audience;
 
 
             // 영화 포스터 이미지를 표시합니다.
@@ -74,37 +93,42 @@ window.onload = function () {
             return fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=a9ab6eb8181e52a08229ade55ea0a55e&language=en-US`);
         })
 
-    make_review();
+    make_review(movieId);
 
 };
 
 //리뷰 이름 목록화하고 이름 순서대로 리뷰 생성
-function make_review() {
-    let review_name_list = localStorage.getItem("이름 목록").split(",");
+function make_review(movieId) {
+    let a = localStorage.getItem(movieId).split("&&");
+    let review_name_list = a.filter((item, pos) => a.indexOf(item) === pos);
     review_name_list.map((name) => {
-        let review_content_write = localStorage.getItem(name).split(",")[0];
-        let review_html = `<a href="#" class="list-group-item list-group-item-action">${name} : ${review_content_write}</a>`;
+        let review_name_write = name.split("&")[0];
+        let review_content_write = localStorage.getItem(name).split("&")[0];
+        let review_html = `<a href="#" class="list-group-item list-group-item-action">${review_name_write} : ${review_content_write}</a>`;
         let element = document.getElementById("review_list");
         element.innerHTML += review_html;
     });
 }
+
 //리뷰 적은 내용 스토리지에 저장 하고 새로고침
+
 function record_review() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const movieId = urlParams.get('id');
+
     let review_name = document.getElementById('review_name').value;
     let review_content = document.getElementById('review_content').value;
     let review_password = document.getElementById('review_password').value;
-    let name_list = localStorage.getItem("이름 목록");
+    let name_list = localStorage.getItem(movieId);
 
 
     if (name_list === null) {
-        localStorage.setItem("이름 목록", review_name);
-        localStorage.setItem(review_name, [review_content, review_password]);
+        localStorage.setItem(movieId, [review_name + "&" + movieId]);
+        localStorage.setItem(review_name + "&" + movieId, review_content + "&" + review_password);
     } else {
-        localStorage.setItem("이름 목록", name_list + "," + review_name);
-        localStorage.setItem(review_name, [review_content, review_password]);
+        localStorage.setItem(movieId, [name_list + "&&" + review_name + "&" + movieId]);
+        localStorage.setItem(review_name + "&" + movieId, review_content + "&" + review_password);
     }
 
-
     location.reload();
-
 }

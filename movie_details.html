@@ -2,22 +2,19 @@
 <html lang="en">
 
 <head>
-    <!-- 부트 스트랩 CDN  -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <!--   -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>영화 상세 정보</title>
-
-    <link rel="stylesheet" href="movie_detail.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
 </head>
 
 <body>
     <div class="backbtn">
         <a href="index.html">메인페이지로 돌아가기</a>
     </div>
-    <h1>영화 상제정보 페이지</h1>
+    <h1>영화 상제정보</h1>
     <div class="main">
         <div class="poster">
             <div class="img" id="poster-container"></div>
@@ -30,6 +27,8 @@
             <p id="movie-runtime"></p>
             <p id="movie-genres"></p>
             <p id="movie-rating"></p>
+            <p id="movie-countries"></p>
+            <p id="movie-audience"></p>
         </div>
         <div class="actor">
             <h1>출연진</h1>
@@ -37,11 +36,15 @@
         </div>
 
     </div>
+
     <!-- 리뷰 작성 폼 -->
+
+    <!-- 리뷰 입력 -->
+
     <div id="review_write">
         <h1>리뷰 작성하기</h1>
         <div class="input-group mb-3">
-            <span class="input-group-text">제목</span>
+            <span class="input-group-text">이름</span>
             <input id="review_name" type="text" class="form-control" aria-label="Sizing example input"
                 aria-describedby="inputGroup-sizing-default">
         </div>
@@ -53,7 +56,7 @@
 
         <div class="input-group mb-3">
             <span class="input-group-text">비번</span>
-            <input id="review_password" type="text" class="form-control" aria-label="Sizing example input"
+            <input id="review_password" type="password" class="form-control" aria-label="Sizing example input"
                 aria-describedby="inputGroup-sizing-default">
         </div>
         <button onclick="record_review()" type="button" class="btn btn-dark">기록하기</button>
@@ -69,7 +72,9 @@
             </a>
         </div>
     </div>
+
     <script src="movie_detail.js"></script>
+    <link rel="stylesheet" href="movie_detail.css">
 </body>
 
 </html>
