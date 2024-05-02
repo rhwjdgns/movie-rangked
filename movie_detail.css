@@ -98,4 +98,10 @@ a{
 }
 .list-group{
     max-width: 300px; /* 예시로 너비를 300px로 설정 */
+    display: flex;
 }
+.star{
+    max-width: 150px; /* 예시로 너비를 300px로 설정 */
+    display: flex;
+}
+
