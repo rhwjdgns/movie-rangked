@@ -41,28 +41,34 @@ function createMovieCard(movie) {
   const cardBody = document.createElement("div");
   cardBody.classList.add("card-body");
 
+  // 영화 제목
   const title = document.createElement("h5");
   title.classList.add("card-title");
   title.textContent = movie.title;
 
+  // 영화 내용
   const overview = document.createElement("p");
   overview.classList.add("card-text");
   overview.textContent = movie.overview;
 
+  // 영화 평점
   const voteAverage = document.createElement("p");
   voteAverage.classList.add("card-average");
   voteAverage.textContent = "평점: " + movie.vote_average;
-
+  
+  // 영화배우 타이틀
   const castLabel = document.createElement("p");
   castLabel.classList.add("cast-label");
   castLabel.textContent = "Actor";
 
+  // 영화배우
+  const castList = document.createElement("ul");
+  castList.classList.add("cast-list");
+
+  // 상세정보 버튼
   const button = document.createElement("button");
   button.textContent = "Additional Information";
   button.classList.add("btn", "btn-primary");
-
-  const castList = document.createElement("ul");
-  castList.classList.add("cast-list");
 
   card.dataset.movieId = movie.id;
 
@@ -76,11 +82,9 @@ function createMovieCard(movie) {
   // 각 요소를 카드에 추가합니다.
   card.appendChild(title);
   card.appendChild(poster);
-  card.appendChild(overview);
   card.appendChild(cardBody);
   card.appendChild(voteAverage);
   card.appendChild(castLabel);
-  card.appendChild(castList);
   card.appendChild(button);
 
   return card; // 생성된 카드를 반환합니다.

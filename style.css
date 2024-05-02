@@ -25,11 +25,17 @@ body { /*페이지 몸*/
     }
 }
 
-.card { /*카드배치,속성1*/
+.grid-container { /*반응형 구현*/
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px; /* 카드 사이의 간격을 조절할 수 있습니다. */
+    justify-items: center; /* 가로 정렬을 중앙으로 설정합니다. */
+  }
+
+.card { /*카드배치1,속성*/
     width: 300px;
-    height: 1050px;
+    height: 800px;
     text-align: center;
-    /* border: 0.2px solid rgb(44, 44, 44); */
     border-radius: 10px;
     box-shadow: 0 5px 20px rgba(255, 134, 134, 0.493);
     background-color: rgb(0, 0, 0);
@@ -42,9 +48,10 @@ body { /*페이지 몸*/
 
 #mycards { /*카드배치2*/
     display: flex;
-    flex-wrap: wrap; /* 자식 요소들이 넘치면 다음 줄로 내려가도록 설정 */
-    align-items: flex-start; /* 자식 요소들을 수직으로 상단에 정렬 */
-}
+    flex-wrap: wrap;
+    justify-content: center; /* 가로 정렬을 중앙으로 설정합니다. */
+    gap: 20px; /* 카드 사이의 간격을 조절할 수 있습니다. */
+  }
 
 .card-title { /*영화 제목*/
     color: white;
