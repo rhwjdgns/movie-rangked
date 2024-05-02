@@ -28,7 +28,6 @@ window.onload = function () {
             document.getElementById('poster-container').appendChild(poster);
 
             // 영화 출연진 정보를 가져오는 API 요청
-
             fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=a9ab6eb8181e52a08229ade55ea0a55e&language=en-US`)
                 .then(response => response.json())
                 .then(data => {
@@ -74,6 +73,9 @@ window.onload = function () {
 
             return fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=a9ab6eb8181e52a08229ade55ea0a55e&language=en-US`);
         })
+
+        
+
         .then(response => response.json())
         .then(data => {
             // 영화 출연진 정보 중에서 상위 몇 명만 가져와서 표시합니다.
@@ -104,6 +106,7 @@ window.onload = function () {
         .catch(error => console.log('Error fetching movie details:', error));
 
     make_review();
+
 };
 
 //리뷰 이름 목록화하고 이름 순서대로 리뷰 생성
