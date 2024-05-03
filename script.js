@@ -1,6 +1,6 @@
 let slideIndex = 0;
-let intervalId;
 
+// 이미지 슬라이드
 function showSlide(index) {
   const slides = document.querySelectorAll('.carousel-inner img');
   if (index >= slides.length) {
@@ -12,21 +12,22 @@ function showSlide(index) {
   document.querySelector('.carousel-inner').style.transform = `translateX(${offset}%)`;
 }
 
+// 이미지 후퇴
 function prevSlide() {
   slideIndex--;
   showSlide(slideIndex);
 }
 
+// 이미지 전진
 function nextSlide() {
   slideIndex++;
   showSlide(slideIndex);
 }
 
+// 자동 순환 8초
 setInterval(function () {
   nextSlide();
 }, 8000);
-
-showSlide(slideIndex);
 
 // TMDB Top Rated
 const options = {
@@ -36,8 +37,6 @@ const options = {
     Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhOWFiNmViODE4MWU1MmEwODIyOWFkZTU1ZWEwYTU1ZSIsInN1YiI6IjY2MjZlNmViNjNlNmZiMDE3ZWZkMWVhMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.OiYT8F5sTGv-kWG9PV4jADxovT2xyU4xdcCNA5ySr-A'
   }
 };
-
-
 
 // 영화 출연진 정보를 가져오는 함수
 function getCastDetails(movieId) {
