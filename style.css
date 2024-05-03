@@ -1,38 +1,155 @@
-body { /*페이지 몸*/
+body {
+    /*페이지 몸*/
     background-color: rgb(19, 0, 0);
 }
 
-.form-floating { /*title(요즘 핫한 영화 리스트)*/
+.title {
+    /* 9-movie */
+    color: rgba(11, 226, 255, 0.815);
+    font-family: "Poetsen One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0px;
+    left: 30px;
+}
+
+.grid-container {
+    /*반응형 구현*/
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    justify-items: center;
+}
+
+.popcorn-img {
+    /* 팝콘이미지 */
+    width: 40px;
+    height: auto;
+    margin-left: 20px;
+    margin-top: 15px;
+}
+
+.form-floating {
+    /*따라다니는 검색창 제목(Search Ghost)*/
     color: rgb(207, 211, 0);
     text-align: center;
     font-family: "Nanum Pen Script", cursive;
     font-weight: 400;
     font-style: normal;
     font-size: 25px;
+    position: fixed;
+    z-index: 9999;
+    top: 20px;
+    right: 20px;
 }
 
-.input-group { /*영화 제목,배우 검색(입력란)*/
+.form-floating h1 {
+    /* 검색창 제목을 페이지 위쪽에 찰싹 붙히기 */
+    margin: 0;
+}
+
+.input-group {
+    /*따라다니는 검색 입력란*/
     color: white;
     text-align: center;
+    margin-top: 10px;
+    display: flex;
+    position: relative;
 
-    .form-control { /*입력란 속성*/
+    .form-control {
+        /*입력란 속성*/
         font-size: 20px;
         padding: 10px;
+        border-radius: 20px;
+        background-color: white;
     }
-    #searchButton { /*입력란 버튼 속성*/
-        font-size: 15px;
+
+    #searchButton {
+        /*입력란 버튼 속성*/
+        font-size: 16.7px;
         padding: 10px 10px;
+        border-radius: 20px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        cursor: pointer;
+        background-color: rgb(240, 255, 29);
+        color: black;
     }
 }
 
-.grid-container { /*반응형 구현*/
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px; /* 카드 사이의 간격을 조절할 수 있습니다. */
-    justify-items: center; /* 가로 정렬을 중앙으로 설정합니다. */
-  }
+.carousel {
+    /* 자동 회전하는 이미지 */
+    position: relative;
+    max-width: 1200px;
+    max-height: 500px;
+    margin: auto;
+    overflow: hidden;
+    background-color: black;
+    margin-top: 50px;
+    border-radius: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.212);
+}
 
-.card { /*카드배치1,속성*/
+.carousel-inner {
+    /* 넘어가는동안의 시간 */
+    display: flex;
+    transition: transform 0.9s ease;
+    opacity: 0.5;
+
+}
+
+.carousel-inner img {
+    /* 이미지 비율 */
+    width: 100%;
+    height: auto;
+}
+
+.prev,
+.next {
+    /* 뒤로가기,넘기기 버튼 */
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1;
+}
+
+.next {
+    /*뒤로가기는 자동으로 왼쪽에 붙어서 필요없음*/
+    right: 0;
+}
+
+.list {
+    /* Movie List */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Poetsen One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: rgb(66, 153, 66);
+}
+
+.list-img {
+    /* 슬레이트 이미지 */
+    width: 40px;
+    height: 40px;
+    margin-top: 7px;
+    margin-left: 10px;
+}
+
+.card {
+    /*카드배치1,속성*/
     width: 300px;
     height: 800px;
     text-align: center;
@@ -41,25 +158,28 @@ body { /*페이지 몸*/
     background-color: rgb(0, 0, 0);
     margin-right: 30px;
     margin-left: 40px;
-    margin-top: 50px;
+    margin-top: 10px;
     position: relative;
-    justify-content: center; /* 수평으로 가운데 정렬 */
+    justify-content: center;
 }
 
-#mycards { /*카드배치2*/
+#mycards {
+    /*카드배치2*/
     display: flex;
     flex-wrap: wrap;
-    justify-content: center; /* 가로 정렬을 중앙으로 설정합니다. */
-    gap: 20px; /* 카드 사이의 간격을 조절할 수 있습니다. */
-  }
+    justify-content: center;
+    gap: 20px;
+}
 
-.card-title { /*영화 제목*/
+.card-title {
+    /*영화 제목*/
     color: white;
     font-size: 20px;
     font-style: italic;
 }
 
-.card-img-top { /*이미지*/
+.card-img-top {
+    /*이미지*/
     position: absolute;
     transform: translateX(-50%);
     border-radius: 20px;
@@ -69,18 +189,16 @@ body { /*페이지 몸*/
     top: 120px;
 }
 
-/* .card-img-top:hover {
-    cursor: pointer;
-} */
-
-.card-text { /*내용*/
+.card-text {
+    /*내용*/
     color: white;
     padding: 10px;
     position: absolute;
     top: 500px;
 }
 
-.card-average { /*평점*/
+.card-average {
+    /*평점*/
     color: white;
     position: absolute;
     bottom: 10px;
@@ -89,7 +207,8 @@ body { /*페이지 몸*/
     margin-bottom: 220px;
 }
 
-.cast-label { /*Actor(배우목록-제목)*/
+.cast-label {
+    /*Actor(배우목록-제목)*/
     color: yellow;
     position: absolute;
     bottom: 10px;
@@ -98,7 +217,8 @@ body { /*페이지 몸*/
     margin-bottom: 180px;
 }
 
-.cast-list { /*배우 리스트*/
+.cast-list {
+    /*배우 리스트*/
     white-space: nowrap;
     position: absolute;
     bottom: 10px;
@@ -108,29 +228,31 @@ body { /*페이지 몸*/
     color: rgb(255, 255, 255);
 }
 
-.btn-primary { /*상세정보 버튼(노란버튼)*/
-    display: inline-block;/* 인라인 블록으로 설정하여 요소가 수평으로 표시되도록 함 */
-    color: #000000;/* 텍스트 색상을 설정함 */
-    cursor: pointer;/* 마우스 커서를 포인터 형태로 변경하여 클릭 가능한 요소임을 나타냄 */
-    border: 1px solid transparent;/* 테두리 스타일을 설정함 */
-    padding: 0.375rem 0.75rem;/* 내부 여백을 설정함 */
-    font-size: 1rem;/* 폰트 크기를 설정함 (rem 단위를 사용하여 상대적인 크기를 지정함) */
-    line-height: 1.5;/* 줄 간격을 설정함 */
-    border-radius: 0.25rem;/* 테두리의 꼭지점을 둥글게 설정함 */
-    background-color: #ffc107;/* 배경 색상을 설정함 */
-    white-space: nowrap;/* 텍스트의 줄바꿈을 방지하여 수평으로 펴지도록 함 */
-    position: absolute;/* 위치를 부모 요소에 상대적으로 지정 */
-    bottom: 10px;/* 하단으로부터의 간격 조정 */
-    left: 50%;/* 가운데 정렬을 위해 부모 요소의 가로 중앙에 배치 */
-    transform: translateX(-50%);/* 가로 방향으로의 이동을 위한 가로 정렬 */
+.btn-primary {
+    /*상세정보 버튼(노란버튼)*/
+    display: inline-block;
+    color: #000000;
+    cursor: pointer;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    background-color: #ffc107;
+    white-space: nowrap;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
-.btn-primary:hover { /*상세정보 버튼 마우스 올렸을때 효과*/
+.btn-primary:hover {
+    /*상세정보 버튼 마우스 올렸을때 효과*/
     color: #212529;
     background-color: white;
     border-color: white;
     transition: color 0.15s ease-in-out,
         background-color 0.15s ease-in-out,
         border-color 0.15s ease-in-out,
-        box-shadow 0.15s ease-in-out; /* 전환 효과를 적용하여 요소 상태 변경 시 부드러운 애니메이션 효과를 부여함 */
+        box-shadow 0.15s ease-in-out;
 }

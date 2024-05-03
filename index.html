@@ -4,24 +4,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>영화 검색 사이트-개인 과제</title>
+    <title>9-movie</title>
     <link rel="stylesheet" href="style.css">
-    <!-- title 폰트 -->
+    <!-- search Ghost 폰트 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+
+    <!-- 9 movie 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Freeman&family=Poetsen+One&display=swap" rel="stylesheet">
 </head>
 
 <body>
+    <!-- 타이틀(9 Movie) -->
+    <div class="title">
+        <h1><span class="movie-title">9 - movie</span></h1>
+        <img class="popcorn-img" src="https://cdn-icons-png.flaticon.com/512/3418/3418886.png" alt="팝콘 이미지">
+    </div>
+
+    <!-- 검색어 입력란,입력란 제목 -->
     <div class="form-floating">
-        <h1><span class="badge text-bg-secondary">요즘 핫한 영화 리스트</span></h1>
+        <h1><span class="badge text-bg-secondary">Search Ghost</span></h1>
+        <div class="input-group">
+            <input id="movieInput" type="search" class="form-control" placeholder="영화 제목,배우 검색">
+            <button id="searchButton" type="button">검색</button>
+        </div>
     </div>
-
-    <div class="input-group">
-        <input id="movieInput" type="search" class="form-control" placeholder="영화 제목,배우 검색">
-        <button id="searchButton" type="button">검색</button>
+    <!-- 순환이미지 -->
+    <div id="carousel" class="carousel">
+        <div class="carousel-inner">
+            <img src="https://miro.medium.com/v2/resize:fit:1400/1*KBwRKCB9g4O0ojNzYC1uvw.jpeg" alt="Slide 1">
+            <img src="https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6bd18168-9e74-441f-bc22-cf8e8a795743_1280x720.jpeg"
+                alt="Slide 2">
+            <img src="https://i.ytimg.com/vi/mxphAlJID9U/maxresdefault.jpg" alt="Slide 3">
+            <img src="https://i.ytimg.com/vi/jBdRhhSt3Bc/maxresdefault.jpg" alt="Slide 4">
+            <img src="https://images.squarespace-cdn.com/content/v1/54fc8146e4b02a22841f4df7/1686260270085-QUHOSHU80G85DUG9N17X/cover.jpeg"
+                alt="Slide 5">
+            <img src="https://play-lh.googleusercontent.com/proxy/J_V_oH2ToHcjibIN6xrltDzL2fEkzo8rGr6G4WGlf-uWqhUv0lGFLhdpcAOK-nZWhSKcrSEIqHho2ag_acEqMmuEUGbXAdcMP_CqPhsUP3RsyVAJzA=s1920-w1920-h1080"
+                alt="Slide 6">
+            <img src="https://dailycollegian.com/wp-content/uploads/2022/04/dark-knight-1.jpeg" alt="Slide 7">
+            <img src="https://m.media-amazon.com/images/M/MV5BYzA4ZWRhNjktMTA3ZS00NDNiLThmMDMtNzdlYzk0ZjY2ZGFmXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_.jpg"
+                alt="Slide 8">
+            <img src="https://static1.srcdn.com/wordpress/wp-content/uploads/2020/02/The-Good-the-Bad-and-the-Ugly.jpg"
+                alt="Slide 9">
+            <img src="https://static1.srcdn.com/wordpress/wp-content/uploads/2023/02/the-12-angry-men-movie-jurors-at-the-table-1.jpg"
+                alt="Slide 10">
+        </div>
+        <button class="prev" onclick="prevSlide()">&#10094;</button>
+        <button class="next" onclick="nextSlide()">&#10095;</button>
     </div>
-
+    <!-- 영화 리스트 제목(Movie List) -->
+    <div class="list">
+        <h1><span class="movie-list">Movie List</span></h1>
+        <img class="list-img" src="https://cdn-icons-png.flaticon.com/512/8694/8694015.png" alt="리스트 이미지">
+    </div>
+    <!-- 카드 컨테이너 -->
     <div id="mycards"></div>
 
     <script src="script.js"></script>

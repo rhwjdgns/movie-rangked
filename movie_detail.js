@@ -93,7 +93,6 @@ window.onload = function () {
             return fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=a9ab6eb8181e52a08229ade55ea0a55e&language=en-US`);
         })
 
-
     make_review(movieId);
 
 };

@@ -1,3 +1,33 @@
+let slideIndex = 0;
+let intervalId;
+
+function showSlide(index) {
+  const slides = document.querySelectorAll('.carousel-inner img');
+  if (index >= slides.length) {
+    slideIndex = 0;
+  } else if (index < 0) {
+    slideIndex = slides.length - 1;
+  }
+  const offset = -slideIndex * 100;
+  document.querySelector('.carousel-inner').style.transform = `translateX(${offset}%)`;
+}
+
+function prevSlide() {
+  slideIndex--;
+  showSlide(slideIndex);
+}
+
+function nextSlide() {
+  slideIndex++;
+  showSlide(slideIndex);
+}
+
+setInterval(function () {
+  nextSlide();
+}, 8000);
+
+showSlide(slideIndex);
+
 // TMDB Top Rated
 const options = {
   method: 'GET',
@@ -6,6 +36,8 @@ const options = {
     Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhOWFiNmViODE4MWU1MmEwODIyOWFkZTU1ZWEwYTU1ZSIsInN1YiI6IjY2MjZlNmViNjNlNmZiMDE3ZWZkMWVhMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.OiYT8F5sTGv-kWG9PV4jADxovT2xyU4xdcCNA5ySr-A'
   }
 };
+
+
 
 // 영화 출연진 정보를 가져오는 함수
 function getCastDetails(movieId) {
@@ -55,7 +87,7 @@ function createMovieCard(movie) {
   const voteAverage = document.createElement("p");
   voteAverage.classList.add("card-average");
   voteAverage.textContent = "평점: " + movie.vote_average;
-  
+
   // 영화배우 타이틀
   const castLabel = document.createElement("p");
   castLabel.classList.add("cast-label");
@@ -95,7 +127,7 @@ function registerCardClickEvent() {
   const cards = document.querySelectorAll('.card');
   cards.forEach(card => {
     const detailButton = card.querySelector('.btn-primary');
-    detailButton.addEventListener('click', function(event) {
+    detailButton.addEventListener('click', function (event) {
       event.stopPropagation();
       const movieId = card.getAttribute('data-movie-id');
       window.location.href = 'movie_details.html?id=' + movieId;
@@ -147,7 +179,7 @@ fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1&api_ke
         filterMovies(data, userInput, cardContainer);
       }
     });
-    
+
     // 초기 카드에 클릭 이벤트를 등록합니다.
     registerCardClickEvent();
   });
