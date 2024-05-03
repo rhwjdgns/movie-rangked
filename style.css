@@ -69,6 +69,10 @@ body { /*페이지 몸*/
     top: 120px;
 }
 
+/* .card-img-top:hover {
+    cursor: pointer;
+} */
+
 .card-text { /*내용*/
     color: white;
     padding: 10px;

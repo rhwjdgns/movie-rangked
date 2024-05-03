@@ -90,17 +90,14 @@ function createMovieCard(movie) {
   return card; // 생성된 카드를 반환합니다.
 }
 
-// 클릭 이벤트를 등록하는 함수
+// 상세정보 버튼을 생성하고 클릭 이벤트를 추가하는 함수
 function registerCardClickEvent() {
-  // 카드 요소를 가져옵니다.
   const cards = document.querySelectorAll('.card');
-  // 각 카드에 대해 클릭 이벤트를 추가합니다.
   cards.forEach(card => {
-    card.addEventListener('click', function () {
-      // 카드에 설정된 데이터 속성인 'data-movie-id'를 사용하여 영화 ID를 가져옵니다.
-      const movieId = this.getAttribute('data-movie-id');
-
-      // 해당 영화의 ID를 사용하여 새로운 페이지로 이동합니다.
+    const detailButton = card.querySelector('.btn-primary');
+    detailButton.addEventListener('click', function(event) {
+      event.stopPropagation();
+      const movieId = card.getAttribute('data-movie-id');
       window.location.href = 'movie_details.html?id=' + movieId;
     });
   });
@@ -150,6 +147,7 @@ fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1&api_ke
         filterMovies(data, userInput, cardContainer);
       }
     });
+    
     // 초기 카드에 클릭 이벤트를 등록합니다.
     registerCardClickEvent();
   });
