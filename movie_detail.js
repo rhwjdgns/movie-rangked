@@ -110,12 +110,12 @@ window.onload = function () {
 
 //리뷰 이름 목록화하고 이름 순서대로 리뷰 생성
 function make_review(movieId) {
-    let star_img = ["⭐","⭐⭐","⭐⭐⭐","⭐⭐⭐⭐","⭐⭐⭐⭐⭐"];
+    let star_img = ["⭐", "⭐⭐", "⭐⭐⭐", "⭐⭐⭐⭐", "⭐⭐⭐⭐⭐"];
     let a = localStorage.getItem(movieId).split("&&");
     let review_name_list = a.filter((item, pos) => a.indexOf(item) === pos); //중복 제거
     review_name_list.map((name) => {
         let review_name_write = name.split("&")[0];
-        let review_name_star = star_img[localStorage.getItem(name).split("&")[2]-1];
+        let review_name_star = star_img[localStorage.getItem(name).split("&")[2] - 1];
         let review_content_write = localStorage.getItem(name).split("&")[0];
         let review_html = `<a class="list-group-item list-group-item-action">${review_name_write} : ${review_content_write} : ${review_name_star}
         
@@ -238,13 +238,20 @@ function review_modify(name_id) { //내용 수정시 함수
     let re_review_password = document.getElementById(name_id + "review_modify").elements[2].value;
     let current_password = localStorage.getItem(name_id).split("&")[1];
 
-    if (re_review_password == current_password) {
-        localStorage.setItem(name_id, re_review_content + "&" + current_password + "&" + re_review_star);
-        alert("수정 완료");
-        location.reload();
-    }
-    else {
-        alert("비밀번호가 일치하지 않습니다.");
+    if (!re_review_content) {
+        alert("내용을 입력해 주세요.");
+    } else if (!re_review_password) {
+        alert("비밀번호를 입력해 주세요.");
+    } else {
+        if (re_review_password == current_password) {
+            localStorage.setItem(name_id, re_review_content + "&" + current_password + "&" + re_review_star);
+            alert("수정 완료");
+            location.reload();
+        }
+        else {
+            alert("비밀번호가 일치하지 않습니다.");
+        }
+
     }
 
 }
