@@ -99,6 +99,11 @@ a{
     width: 1500px; /* 예시로 너비를 300px로 설정 */
 }
 .list-group{
+    max-width: 300px; /* 예시로 너비를 300px로 설정 */
     display: flex;
-    width: 1500px; /* 예시로 너비를 300px로 설정 */
 }
+.star{
+    max-width: 150px; /* 예시로 너비를 300px로 설정 */
+    display: flex;
+}
+
