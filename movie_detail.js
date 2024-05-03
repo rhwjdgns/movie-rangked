@@ -23,21 +23,21 @@ window.onload = function () {
             const countries = data.production_countries.map(country => country.name).join(', ');
             document.getElementById('movie-countries').textContent = "제작 국가: " + countries;
 
-             // 관람 관객 수 정보를 가져와서 표시합니다. (TMDB API에는 해당 정보가 없을 수 있습니다.)
-        const revenue = data.revenue;
-        let audience;
-        if (revenue) {
-            if (revenue >= 100000000) {
-                audience = Math.round(revenue / 100000000) + "억 명";
-            } else if (revenue >= 10000000) {
-                audience = Math.round(revenue / 10000000) + "천만 명";
-            } else if (revenue >= 1000000) {
-                audience = Math.round(revenue / 1000000) + "백만 명";
+            // 관람 관객 수 정보를 가져와서 표시합니다. (TMDB API에는 해당 정보가 없을 수 있습니다.)
+            const revenue = data.revenue;
+            let audience;
+            if (revenue) {
+                if (revenue >= 100000000) {
+                    audience = Math.round(revenue / 100000000) + "억 명";
+                } else if (revenue >= 10000000) {
+                    audience = Math.round(revenue / 10000000) + "천만 명";
+                } else if (revenue >= 1000000) {
+                    audience = Math.round(revenue / 1000000) + "백만 명";
+                }
+            } else {
+                audience = "정보 없음";
             }
-        } else {
-            audience = "정보 없음";
-        }
-        document.getElementById('movie-audience').textContent = "누적 관람 관객 수: " + audience;
+            document.getElementById('movie-audience').textContent = "누적 관람 관객 수: " + audience;
 
 
             // 영화 포스터 이미지를 표시합니다.
@@ -132,47 +132,66 @@ window.onload = function () {
 //리뷰 이름 목록화하고 이름 순서대로 리뷰 생성
 function make_review(movieId) {
     let star_img = ["⭐", "⭐⭐", "⭐⭐⭐", "⭐⭐⭐⭐", "⭐⭐⭐⭐⭐"];
+
+    let element_list = document.getElementById("review_list");
+    let element_title = document.getElementById("review_title");
+    let element_title_empty = document.getElementById("review_init");
     let a = localStorage.getItem(movieId).split("&&");
     let review_name_list = a.filter((item, pos) => a.indexOf(item) === pos); //중복 제거
+
+    if (review_name_list.length != 0) {
+        element_title_empty.remove();
+    }
+
+    let review_average = star_img[Math.round(Number(localStorage.getItem(movieId + "&star")) / review_name_list.length) - 1];
+    element_title.textContent = "영화리뷰 | 유저 평점 : " + review_average;
+
     review_name_list.map((name) => {
         let review_name_write = name.split("&")[0];
         let review_name_star = star_img[localStorage.getItem(name).split("&")[2] - 1];
         let review_content_write = localStorage.getItem(name).split("&")[0];
-        let review_html = `<a class="list-group-item list-group-item-action">${review_name_write} : ${review_content_write} : ${review_name_star}
-        
-        <button id="${name}" onclick="list_del(this.id)" type="button" class="btn-position btn-close" aria-label="Close"></button>
-        <div class="dropdown">
-            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
-                aria-expanded="false" data-bs-auto-close="outside">
-                수정
-            </button>
-            <form class="dropdown-menu p-4" id="${name}review_modify">
-                <div class="mb-3">
-                    <label for="re_review_content" class="form-label">변경 내용</label>
-                    <input type="text" class="form-control" id="re_review_content" placeholder="내용 입력">
-                </div>
-                <div class="mb-3">
-                <label for="re_review_star" class="form-label">별점</label>
-                <select id="re_review_star" class="form-select form-select-sm" aria-label="Small select example">
-                <option selected value="5">⭐⭐⭐⭐⭐</option>
-                <option value="4">⭐⭐⭐⭐</option>
-                <option value="3">⭐⭐⭐</option>
-                <option value="2">⭐⭐</option>
-                <option value="1">⭐</option>
-            </select>
-                </div>
-                <div class="mb-3">
-                    <label for="re_review_password" class="form-label">비밀번호</label>
-                    <input type="password" class="form-control" id="re_review_password" placeholder="Password">
-                </div>
-                <button id="${name}" onclick="review_modify(this.id)" type="button"
-                    class="btn btn-primary">변경하기</button>
-            </form>
+        let review_html = `<a class="list-group-item list-group-item-action">
+        <div class="review_information">
+            <div class="review_name_star">${review_name_write} : ${review_name_star}
+            </div>
+    
+            <div class="dropdown review_edit">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                    aria-expanded="false" data-bs-auto-close="outside">
+                    Edit
+                </button>
+                <form class="dropdown-menu p-4" id="${name}review_modify">
+                    <div class="mb-3">
+                        <label for="re_review_content" class="form-label">변경 내용</label>
+                        <input type="text" class="form-control" id="re_review_content" placeholder="내용 입력">
+                    </div>
+                    <div class="mb-3">
+                        <label for="re_review_star" class="form-label">별점</label>
+                        <select id="re_review_star" class="form-select form-select-sm" aria-label="Small select example">
+                            <option selected value="5">⭐⭐⭐⭐⭐</option>
+                            <option value="4">⭐⭐⭐⭐</option>
+                            <option value="3">⭐⭐⭐</option>
+                            <option value="2">⭐⭐</option>
+                            <option value="1">⭐</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="re_review_password" class="form-label">비밀번호</label>
+                        <input type="password" class="form-control" id="re_review_password" placeholder="Password">
+                    </div>
+                    <button id="${name}" onclick="review_modify(this.id)" type="button"
+                        class="btn btn-primary">변경하기</button>
+                    <button id="${name}" onclick="list_del(this.id)" type="button" class="btn btn-primary">삭제하기</button>
+                </form>
+            </div>
         </div>
-        </a>`;
-        let element = document.getElementById("review_list");
-        element.innerHTML += review_html;
+        <div><br> ${review_content_write}
+        </div>
+    </a>`;
+
+        element_list.innerHTML += review_html;
     });
+
     let re_review_name_list = review_name_list.join("&&");
     localStorage.setItem(movieId, re_review_name_list);
 }
@@ -189,8 +208,8 @@ function record_review() {
     let review_star = document.getElementById('movie_star').value;
 
 
-
-    let name_list = localStorage.getItem(movieId)
+    let star_average = localStorage.getItem(movieId + "&star");
+    let name_list = localStorage.getItem(movieId);
     let verdict = false;
 
     if (!document.getElementById('review_name').value) {//입력 안할시 반환
@@ -218,11 +237,14 @@ function record_review() {
         if (name_list == null) {
             localStorage.setItem(movieId, review_name + "&" + movieId);
             localStorage.setItem(review_name + "&" + movieId, review_content + "&" + review_password + "&" + review_star);
+            localStorage.setItem(movieId + "&star", review_star);
         } else {
             localStorage.setItem(movieId, [name_list + "&&" + review_name + "&" + movieId]);
             localStorage.setItem(review_name + "&" + movieId, review_content + "&" + review_password + "&" + review_star);
+            localStorage.setItem(movieId + "&star", Number(star_average) + Number(review_star));
         }
 
+        alert("입력이 완료되었습니다.");
     }
 
     location.reload();
@@ -234,26 +256,35 @@ function list_del(name_id) { //리스트에서 삭제 함수
 
     if (input_password == localStorage.getItem(name_id).split("&")[1]) {
         let person_movieId = name_id.split("&")[1];
+        let user_star = localStorage.getItem(name_id).split("&")[2];
+        let movie_star = localStorage.getItem(person_movieId + "&star");
         let movie_id_del = localStorage.getItem(person_movieId).split("&&");
         let re_movie_id = movie_id_del.filter((element) => element !== name_id)
+        localStorage.setItem(person_movieId + "&star", Number(movie_star) - Number(user_star));
         localStorage.removeItem(name_id);
 
         if (re_movie_id.length == 0) {
             localStorage.removeItem(person_movieId);
+            localStorage.removeItem(person_movieId + "&star");
         } else {
             localStorage.setItem(person_movieId, re_movie_id.join("&&"));
         }
+
         alert("삭제가 완료되었습니다.")
+        location.reload();
     }
     else (
         alert("비밀번호가 일치하지 않습니다.")
     )
 
-    location.reload();
+
 }
 
 function review_modify(name_id) { //내용 수정시 함수
 
+    let movie_Id = name_id.split("&")[1];
+    let current_user_star = localStorage.getItem(name_id).split("&")[2];
+    let cureent_movie_star = localStorage.getItem(movie_Id + "&star");
     let re_review_content = document.getElementById(name_id + "review_modify").elements[0].value;
     let re_review_star = document.getElementById(name_id + "review_modify").elements[1].value;
     let re_review_password = document.getElementById(name_id + "review_modify").elements[2].value;
@@ -266,6 +297,7 @@ function review_modify(name_id) { //내용 수정시 함수
     } else {
         if (re_review_password == current_password) {
             localStorage.setItem(name_id, re_review_content + "&" + current_password + "&" + re_review_star);
+            localStorage.setItem(movie_Id + "&star", Number(cureent_movie_star) - Number(current_user_star) + Number(re_review_star));
             alert("수정 완료");
             location.reload();
         }
