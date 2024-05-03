@@ -19,6 +19,25 @@ window.onload = function () {
             const genres = data.genres.map(genre => genre.name).join(', ');
             document.getElementById('movie-genres').textContent = "장르: " + genres;
 
+            // 제작 국가 정보를 가져와서 표시합니다.
+            const countries = data.production_countries.map(country => country.name).join(', ');
+            document.getElementById('movie-countries').textContent = "제작 국가: " + countries;
+
+             // 관람 관객 수 정보를 가져와서 표시합니다. (TMDB API에는 해당 정보가 없을 수 있습니다.)
+        const revenue = data.revenue;
+        let audience;
+        if (revenue) {
+            if (revenue >= 100000000) {
+                audience = Math.round(revenue / 100000000) + "억 명";
+            } else if (revenue >= 10000000) {
+                audience = Math.round(revenue / 10000000) + "천만 명";
+            } else if (revenue >= 1000000) {
+                audience = Math.round(revenue / 1000000) + "백만 명";
+            }
+        } else {
+            audience = "정보 없음";
+        }
+        document.getElementById('movie-audience').textContent = "누적 관람 관객 수: " + audience;
 
 
             // 영화 포스터 이미지를 표시합니다.
@@ -76,6 +95,7 @@ window.onload = function () {
 
 
 
+
         .then(response => response.json())
         .then(data => {
             // 영화 출연진 정보 중에서 상위 몇 명만 가져와서 표시합니다.
@@ -106,6 +126,7 @@ window.onload = function () {
         .catch(error => console.log('Error fetching movie details:', error));
 
     make_review(movieId);
+
 };
 
 //리뷰 이름 목록화하고 이름 순서대로 리뷰 생성

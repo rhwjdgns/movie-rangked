@@ -14,6 +14,19 @@ function getCastDetails(movieId) {
     .then(data => data.cast.slice(0, 5)) // 상위 5명의 출연진 정보만 가져옴
 }
 
+// 영화 출연진 정보를 카드에 추가하는 함수
+function addCastToCard(card, cast) {
+  const castList = document.createElement("ul");
+  castList.classList.add("cast-list");
+
+  cast.forEach(actor => {
+    const listItem = document.createElement("li");
+    listItem.textContent = actor.name;
+    castList.appendChild(listItem);
+  });
+  card.appendChild(castList);
+}
+
 // 카드생성 함수
 function createMovieCard(movie) {
   const card = document.createElement("div");
@@ -28,68 +41,63 @@ function createMovieCard(movie) {
   const cardBody = document.createElement("div");
   cardBody.classList.add("card-body");
 
+  // 영화 제목
   const title = document.createElement("h5");
   title.classList.add("card-title");
   title.textContent = movie.title;
 
+  // 영화 내용
   const overview = document.createElement("p");
   overview.classList.add("card-text");
   overview.textContent = movie.overview;
 
+  // 영화 평점
   const voteAverage = document.createElement("p");
   voteAverage.classList.add("card-average");
   voteAverage.textContent = "평점: " + movie.vote_average;
-
+  
+  // 영화배우 타이틀
   const castLabel = document.createElement("p");
   castLabel.classList.add("cast-label");
   castLabel.textContent = "Actor";
 
+  // 영화배우
+  const castList = document.createElement("ul");
+  castList.classList.add("cast-list");
+
+  // 상세정보 버튼
   const button = document.createElement("button");
   button.textContent = "Additional Information";
   button.classList.add("btn", "btn-primary");
 
-  const castList = document.createElement("ul");
-  castList.classList.add("cast-list");
+  card.dataset.movieId = movie.id;
 
-  // 영화 출연진 정보를 가져와서 카드에 추가합니다.
+  // 출연진 정보를 가져와서 카드에 추가합니다.
   getCastDetails(movie.id)
     .then(cast => {
       movie.cast = cast;
-      cast.forEach(actor => {
-        const listItem = document.createElement("li");
-        listItem.textContent = actor.name;
-        castList.appendChild(listItem);
-      });
+      addCastToCard(card, cast);
     });
-
-  card.dataset.movieId = movie.id;
 
   // 각 요소를 카드에 추가합니다.
   card.appendChild(title);
   card.appendChild(poster);
-  card.appendChild(overview);
   card.appendChild(cardBody);
   card.appendChild(voteAverage);
   card.appendChild(castLabel);
-  card.appendChild(castList);
   card.appendChild(button);
-
-
 
   return card; // 생성된 카드를 반환합니다.
 }
 
-// 클릭 이벤트를 등록하는 함수
+// 상세정보 버튼을 생성하고 클릭 이벤트를 추가하는 함수
 function registerCardClickEvent() {
-  // 카드 요소를 가져옵니다.
   const cards = document.querySelectorAll('.card');
-  // 각 카드에 대해 클릭 이벤트를 추가합니다.
   cards.forEach(card => {
-    card.addEventListener('click', function () {
-      // 카드에 설정된 데이터 속성인 'data-movie-id'를 사용하여 영화 ID를 가져옵니다.
-      const movieId = this.getAttribute('data-movie-id');
-
-      // 해당 영화의 ID를 사용하여 새로운 페이지로 이동합니다.
+    const detailButton = card.querySelector('.btn-primary');
+    detailButton.addEventListener('click', function(event) {
+      event.stopPropagation();
+      const movieId = card.getAttribute('data-movie-id');
       window.location.href = 'movie_details.html?id=' + movieId;
     });
   });
@@ -113,8 +121,6 @@ function filterMovies(data, userInput, cardContainer) {
   });
   registerCardClickEvent();
 }
-
-
 
 // API로부터 데이터를 가져오는 fetch 요청
 fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1&api_key=a9ab6eb8181e52a08229ade55ea0a55e')
@@ -141,6 +147,7 @@ fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1&api_ke
         filterMovies(data, userInput, cardContainer);
       }
     });
+    
     // 초기 카드에 클릭 이벤트를 등록합니다.
     registerCardClickEvent();
   });
