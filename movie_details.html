@@ -46,12 +46,13 @@
             <p id="movie-cast"></p>
         </div>
     </div>
-
+    <br>
     <!-- 리뷰 입력 -->
-    <div class="container">
-        <div id="review_write" class="review_record">
+    <div class="container review">
+        <div class="review_input">
             <h1>리뷰 작성하기</h1>
-            <div>
+            <div class="inputs">
+                
                 <div class="input-group mb-3">
                     <span class="input-group-text">이름</span>
                     <input id="review_name" type="text" class="form-control" aria-label="Sizing example input"
@@ -63,32 +64,30 @@
                     <input id="review_password" type="password" class="form-control" aria-label="Sizing example input"
                         placeholder="Password" aria-describedby="inputGroup-sizing-default">
                 </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">내용</span>
+                    <input id="review_content" type="text" class="form-control" aria-label="Sizing example input"
+                        placeholder="Content" aria-describedby="inputGroup-sizing-default">
+                </div>
             </div>
-
-            <div class="input-group mb-3">
-                <span class="input-group-text">내용</span>
-                <input id="review_content" type="text" class="form-control" aria-label="Sizing example input"
-                    placeholder="Content" aria-describedby="inputGroup-sizing-default">
-            </div>
-
             <!-- 유저 별점 입력 -->
-            <div class="star">
-                <select id="movie_star" class="form-select form-select-sm" aria-label="Small select example">
-                    <option selected value="5">⭐⭐⭐⭐⭐</option>
-                    <option value="4">⭐⭐⭐⭐</option>
-                    <option value="3">⭐⭐⭐</option>
-                    <option value="2">⭐⭐</option>
-                    <option value="1">⭐</option>
-                </select>
+            <div class="star_recordbtn">
+                <div class="star">
+                    <select id="movie_star" class="form-select form-select-sm" aria-label="Small select example">
+                        <option selected value="5">⭐⭐⭐⭐⭐</option>
+                        <option value="4">⭐⭐⭐⭐</option>
+                        <option value="3">⭐⭐⭐</option>
+                        <option value="2">⭐⭐</option>
+                        <option value="1">⭐</option>
+                    </select>
+                </div>
+
+                <!-- 기록 버튼 -->
+                <button onclick="record_review()" type="button" class="record_btn btn btn-dark">기록하기</button>
             </div>
-
-
-            <!-- 기록 버튼 -->
-            <button onclick="record_review()" type="button" class="btn btn-dark">기록하기</button>
-
         </div>
 
-        <br><br><br>
+        <br>
 
         <!-- 리뷰 리스트 -->
         <div>

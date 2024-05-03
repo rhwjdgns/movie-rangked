@@ -121,6 +121,7 @@ function make_review(movieId) {
         let review_html = `<a class="list-group-item list-group-item-action">
         <div class="review_information">
             <div class="review_name_star">${review_name_write} : ${review_name_star}
+            
             </div>
     
             <div class="dropdown review_edit">
@@ -153,7 +154,7 @@ function make_review(movieId) {
                 </form>
             </div>
         </div>
-        <div><br> ${review_content_write}
+        <div>${review_content_write}
         </div>
     </a>`;
 
