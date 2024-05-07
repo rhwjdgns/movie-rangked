@@ -6,7 +6,7 @@ body{
     display: grid;
     grid-template-rows: 150px 760px 700px 500px;
     grid-template-columns: 510px 400px 400px 300px;
-    gap: 40px 30px;
+    gap: 40px 80px;
 
 }
 .backbtn{
