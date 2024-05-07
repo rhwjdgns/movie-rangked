@@ -47,62 +47,103 @@
         </div>
     </div>
     <br>
-    <!-- 리뷰 -->
-    <div class="container review"><!-- 리뷰 입력과 나열 창-->
-        <div class="review_input"><!-- 리뷰 입력 -->
-            <div class="inputs"><!-- 리뷰 입력 칸-->
-                <h1>리뷰 작성하기</h1>
-                <div class="user_information"> <!-- 리뷰 사용자 입력 칸-->
-                    <div class="input-group mb-3 review_input_name">
-                        <span class="input-group-text">이름</span>
-                        <input id="review_name" type="text" class="form-control" aria-label="Sizing example input"
-                            placeholder="Name" aria-describedby="inputGroup-sizing-default">
-                    </div>
+    <!-- 리뷰와 비슷한 영화 장르 랭킹 -->
+    <div class="detail_bottom">
+        <div class="review"><!-- 리뷰 입력과 나열 창-->
+            <div class="review_box"><!-- 리뷰 테두리 -->
+                <div class="review_input">
+                    <div class="inputs"><!-- 리뷰 입력 칸-->
+                        <h1>리뷰 작성하기</h1>
+                        <div class="user_information"> <!-- 리뷰 사용자 입력 칸-->
+                            <div class="input-group mb-3 review_input_name">
+                                <span class="input-group-text">이름</span>
+                                <input id="review_name" type="text" class="form-control"
+                                    aria-label="Sizing example input" placeholder="Name"
+                                    aria-describedby="inputGroup-sizing-default">
+                            </div>
 
-                    <div class="input-group mb-3 review_input_password">
-                        <span class="input-group-text">비번</span>
-                        <input id="review_password" type="password" class="form-control"
-                            aria-label="Sizing example input" placeholder="Password"
-                            aria-describedby="inputGroup-sizing-default">
-                    </div>
-                </div>
+                            <div class="input-group mb-3 review_input_password">
+                                <span class="input-group-text">비번</span>
+                                <input id="review_password" type="password" class="form-control"
+                                    aria-label="Sizing example input" placeholder="Password"
+                                    aria-describedby="inputGroup-sizing-default">
+                            </div>
+                        </div>
 
-                <div class="input-group mb-3 review_write">
-                    <span class="input-group-text">내용</span>
-                    <input id="review_content" type="text" class="form-control" aria-label="Sizing example input"
-                        placeholder="Content" aria-describedby="inputGroup-sizing-default">
+                        <div class="input-group mb-3 review_write">
+                            <span class="input-group-text">내용</span>
+                            <input id="review_content" type="text" class="form-control"
+                                aria-label="Sizing example input" placeholder="Content"
+                                aria-describedby="inputGroup-sizing-default">
+                        </div>
+                    </div>
+                    <!-- 유저 별점 입력 -->
+                    <div class="star_recordbtn">
+                        <div class="star">
+                            <select id="movie_star" class="form-select form-select-sm"
+                                aria-label="Small select example">
+                                <option selected value="5">⭐⭐⭐⭐⭐</option>
+                                <option value="4">⭐⭐⭐⭐</option>
+                                <option value="3">⭐⭐⭐</option>
+                                <option value="2">⭐⭐</option>
+                                <option value="1">⭐</option>
+                            </select>
+                        </div>
+
+                        <!-- 기록 버튼 -->
+                        <button onclick="record_review()" type="button" class="record_btn btn btn-dark">기록하기</button>
+                    </div>
                 </div>
             </div>
-            <!-- 유저 별점 입력 -->
-            <div class="star_recordbtn">
-                <div class="star">
-                    <select id="movie_star" class="form-select form-select-sm" aria-label="Small select example">
-                        <option selected value="5">⭐⭐⭐⭐⭐</option>
-                        <option value="4">⭐⭐⭐⭐</option>
-                        <option value="3">⭐⭐⭐</option>
-                        <option value="2">⭐⭐</option>
-                        <option value="1">⭐</option>
-                    </select>
-                </div>
 
-                <!-- 기록 버튼 -->
-                <button onclick="record_review()" type="button" class="record_btn btn btn-dark">기록하기</button>
-            </div>
-        </div>
+            <br>
 
-        <br>
+            <!-- 리뷰 리스트 -->
 
-        <!-- 리뷰 리스트 -->
-        <div>
             <div id="review_list" class="list-group">
-                <div id="review_title" class="list-group-item list-group-item-action active" aria-current="true"
-                    style="position: relative; z-index: 1;">
+                <div id="review_title" class="list-group-item list-group-item-action list-group-item-danger active"
+                    aria-current="true" style="position: relative; z-index: 1;">
                     영화리뷰 | 유저 평점 :
                 </div>
                 <a id="review_init" class="list-group-item list-group-item-action">
                     <span style="opacity: 0.4;">아직 작성된 리뷰가 없습니다.</span>
                 </a>
+            </div>
 
+        </div>
+        <!-- 영화 랭킹 -->
+        <div class="movie_ranked_box card text-bg-danger">
+            <div class="card-header">
+                관련 영화 장르 랭킹
+            </div>
+            <ul id="movie_ranked_list" class=" list-group list-group-flush">
+            </ul>
+        </div>
+
+    </div>
+    <!-- 삭제 알람창 -->
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 style="color: darkblue;" class="modal-title fs-5" id="exampleModalLabel">리뷰작성시 입력했던 비밀번호를
+                        입력해주세요.</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">비번</span>
+                        <input id="del_review_password" type="password" class="form-control"
+                            aria-label="Sizing example input" placeholder="Password"
+                            aria-describedby="inputGroup-sizing-default">
+                    </div>
+                    <div class="del_btn_position">
+                        <button onclick="list_del(this.id)" type="button" class="del_btn btn btn-danger">삭제</button>
+                        <button type="button" onclick="location.reload()" class="btn btn-secondary"
+                            data-bs-dismiss="modal">취소</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

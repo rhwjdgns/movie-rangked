@@ -120,61 +120,77 @@ a{
     border-radius: 20px;
     box-shadow: 0 4px 8px rgba(255, 51, 51, 0.74);
 }
-.review_record{
 
-}
-
-.input-group {
-    display: flex;
-    width: 400px; /* 예시로 너비를 300px로 설정 */
-    margin-left: auto;
-    margin-right: auto;
-}
-.list-group{
-    max-width: 500px; /* 예시로 너비를 300px로 설정 */
-    display: flex;
-}
 .star{
     max-width: 150px; /* 예시로 너비를 300px로 설정 */
     display: flex;
     margin-right: auto;
 }
-
-.container{
-    display: grid;
-    grid-auto-rows: minmax(100px, auto);
-
+.detail_bottom{
+    display: flex;
+    flex-direction: row;
+    max-width: 70%;
+    justify-content: space-between;
 }
-.review_input{  /* 리뷰 입력칸 모음 */
-    max-width: 500px;
+.movie_ranked_box{
+    
+}
+.review{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+.review_box{  /* 리뷰 입력칸 모음 */
+    display: flex;
+    justify-content: center;
     height: 250px;
     border: 3px solid white;
     border-radius: 10px; 
+    max-width: 700px;
+    min-width: 500px;
 }
-
+.review_input{
+    margin: auto;
+    width: 90%;
+    justify-content: center
+}
+.inputs{ /* 리뷰 글자 입력칸 전부*/
+    margin-left: auto;
+    margin-right: auto;
+}
 .user_information{  /* 리뷰 사용자 정보 입력칸*/
     display: flex;
-    width: 390px;
 }
+.review_input_name{ /* 리뷰 사용자 정보 입력칸 중 이름*/
+    width: 49%;
+    margin-left: 0px;
+}
+.review_input_password{ /* 리뷰 사용자 정보 입력칸 중 비번*/
+    margin-right: 0px;
+    margin-left: auto;
+    width: 49%;
+}
+
 .review_write{ /* 리뷰 내용 입력칸*/
+    width: 100%
 }
 
 .review_information{
     display: flex;
 }
-
+.review_list_box{
+    display: flex;
+    justify-content: center;
+    max-width: 700px;
+    min-width: 500px;
+}
 .dropdown-menu{
     width: 400px;
-    
 }
 .dropdown{
     margin-left: auto;
 }
-.inputs{
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 400px;
-}
+
 .record_btn{
     margin-left: auto;
 }
@@ -182,5 +198,9 @@ a{
     margin-left: auto;
     margin-right: auto;
     display: flex;
-    max-width: 400px;
+}
+
+.del_btn_position{
+    display: flex;
+    flex-direction: row;
 }
