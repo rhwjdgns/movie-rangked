@@ -23,21 +23,16 @@ window.onload = function () {
             const countries = data.production_countries.map(country => country.name).join(', ');
             document.getElementById('movie-countries').textContent = "제작 국가: " + countries;
 
-            // 관람 관객 수 정보를 가져와서 표시합니다. (TMDB API에는 해당 정보가 없을 수 있습니다.)
+            //누적 수입
             const revenue = data.revenue;
             let audience;
             if (revenue) {
-                if (revenue >= 100000000) {
-                    audience = Math.round(revenue / 100000000) + "억 명";
-                } else if (revenue >= 10000000) {
-                    audience = Math.round(revenue / 10000000) + "천만 명";
-                } else if (revenue >= 1000000) {
-                    audience = Math.round(revenue / 1000000) + "백만 명";
-                }
+                const formattedRevenue = new Intl.NumberFormat().format(revenue); // 수입에 쉼표(,)를 추가한 포맷
+                document.getElementById('movie-audience').textContent = "누적 관람 수입:  $" + formattedRevenue;
             } else {
                 audience = "정보 없음";
+                document.getElementById('movie-audience').textContent = "누적 관람 수입: " + audience;
             }
-            document.getElementById('movie-audience').textContent = "누적 관람 관객 수: " + audience;
 
 
             // 영화 포스터 이미지를 표시합니다.
@@ -45,6 +40,23 @@ window.onload = function () {
             poster.src = "https://image.tmdb.org/t/p/w500" + data.poster_path;
             poster.alt = data.title + " 포스터";
             document.getElementById('poster-container').appendChild(poster);
+
+            // 영화 스틸컷 이미지(백드롭 이미지)를 표시합니다.
+            const stillsContainer = document.getElementById('stills-container');
+            fetch(`https://api.themoviedb.org/3/movie/${movieId}/images?api_key=a9ab6eb8181e52a08229ade55ea0a55e`)
+                .then(response => response.json())
+                .then(imageData => {
+                    const stills = imageData.backdrops.slice(0, 12); // 상위 12개의 이미지만 표시
+                    stills.forEach(image => {
+                        const stillImage = document.createElement("img");
+                        stillImage.src = "https://image.tmdb.org/t/p/w500" + image.file_path;
+                        stillImage.alt = "스틸컷 이미지";
+                        stillImage.classList.add("col-3", "mb-4");
+                        stillsContainer.appendChild(stillImage);
+                        
+                    });
+                })
+                .catch(error => console.log('Error fetching stills:', error));
 
             // 영화 출연진 정보를 가져오는 API 요청
             fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=a9ab6eb8181e52a08229ade55ea0a55e&language=en-US`)
@@ -92,7 +104,7 @@ window.onload = function () {
 
             return fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=a9ab6eb8181e52a08229ade55ea0a55e&language=en-US`);
         })
-
+            
     make_review(movieId);
 
 };
