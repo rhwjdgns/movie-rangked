@@ -1,4 +1,3 @@
-
 body{
     background-color: rgb(19, 0, 0);  
 }
@@ -8,7 +7,7 @@ body{
     top: 20px; /* 위에서 20px 만큼 떨어진 위치에 배치 */
     right: 20px; /* 오른쪽에서 20px 만큼 떨어진 위치에 배치 */
     width: 190px;
-    height: 80px;
+    height: 90px;
     border: none;
     color: black;
     padding: 10px 20px;
@@ -21,7 +20,17 @@ body{
     border: 3px solid white;
     border-radius: 30px;
 }
-
+.top_font{
+    font-family: "Stylish", serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 70px;
+}
+.actor_font{
+    font-family: "Jua", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
 h1{
     color: white;
     font-size: 40px;
@@ -29,6 +38,10 @@ h1{
 a{
     color: white;
     text-decoration: none;
+    font-family: "Stylish", serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 25px;
 }
 .main{
     display: flex;
@@ -51,14 +64,17 @@ a{
 }
 
 .movie_info{
+    font-family: "PT Sans Narrow", sans-serif;
+    font-weight: 700;
+    font-style: normal;
     padding: 10px;
-    font-size: 20px;
+    font-size: 28px;
     text-align: left;
     color: white;
     margin-left: 30px;
     width: 1000px;
     min-width: 300px; /* 최소 너비 설정 */
-    height: auto;
+    height: 600px;
     border: 4px solid white;
     border-radius: 30px;
     overflow: auto;
@@ -92,11 +108,7 @@ a{
     border-radius: 20px;
     overflow-y: auto; /* 출연진 목록이 넘칠 때 스크롤 생성 */
 }
-@media screen and (max-width: 1860px) {
-    .actor {
-        max-height: 600px; /* 화면 높이가 작을 때 더 많이 줄어들도록 설정 */
-    }
-}
+
 .actor::-webkit-scrollbar {
     width: 10px; /* 스크롤 바의 너비 */
 }
@@ -120,9 +132,30 @@ a{
     border-radius: 20px;
     box-shadow: 0 4px 8px rgba(255, 51, 51, 0.74);
 }
-.review_record{
 
+.stills{
+    width: 1450px;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    border: 4px solid white;
+    border-radius: 20px;
+    padding: 10px;
 }
+.stills_font{
+    font-family: "Jua", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+#stills-container img {
+    transition: transform 0.3s ease;
+}
+
+#stills-container img:hover {
+    transform: scale(1.05); /* 마우스를 올렸을 때 약간 확대됨 */
+}
+
 
 .input-group {
     display: flex;
@@ -155,8 +188,6 @@ a{
 .user_information{  /* 리뷰 사용자 정보 입력칸*/
     display: flex;
     width: 390px;
-}
-.review_write{ /* 리뷰 내용 입력칸*/
 }
 
 .review_information{
