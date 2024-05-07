@@ -26,13 +26,19 @@ window.onload = function () {
             //누적 수입
             const revenue = data.revenue;
             let audience;
-            if (revenue) {
-                const formattedRevenue = new Intl.NumberFormat().format(revenue); // 수입에 쉼표(,)를 추가한 포맷
-                document.getElementById('movie-audience').textContent = "누적 관람 수입:  $" + formattedRevenue;
-            } else {
-                audience = "정보 없음";
-                document.getElementById('movie-audience').textContent = "누적 관람 수입: " + audience;
+
+            switch (revenue) {
+                case undefined:
+                case null:
+                    audience = "정보 없음";
+                    break;
+                default:
+                    const formattedRevenue = new Intl.NumberFormat().format(revenue);
+                    audience = "$" + formattedRevenue;
+                    break;
             }
+
+            document.getElementById('movie-audience').textContent = "누적 관람 수입: " + audience;
 
 
             // 영화 포스터 이미지를 표시합니다.
@@ -53,7 +59,7 @@ window.onload = function () {
                         stillImage.alt = "스틸컷 이미지";
                         stillImage.classList.add("col-3", "mb-4");
                         stillsContainer.appendChild(stillImage);
-                        
+
                     });
                 })
                 .catch(error => console.log('Error fetching stills:', error));
@@ -92,19 +98,16 @@ window.onload = function () {
             fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=a9ab6eb8181e52a08229ade55ea0a55e&language=en-US`)
                 .then(response => response.json())
                 .then(data => {
-                    // 첫 번째 감독의 이름을 가져와서 HTML에 표시합니다.
                     const directorName = data.crew.find(member => member.job === "Director");
-                    if (directorName) {
-                        document.getElementById('movie-director').textContent = "감독: " + directorName.name;
-                    } else {
-                        document.getElementById('movie-director').textContent = "감독 정보 없음";
-                    }
+                    const directorText = directorName ? "감독: " + directorName.name : "감독 정보 없음";
+                    document.getElementById('movie-director').textContent = directorText;
                 })
                 .catch(error => console.log('Error fetching director details:', error));
 
+
             return fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=a9ab6eb8181e52a08229ade55ea0a55e&language=en-US`);
         })
-            
+
     make_review(movieId);
 
 };

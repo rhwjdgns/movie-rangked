@@ -156,9 +156,6 @@ a{
     transform: scale(1.05); /* 마우스를 올렸을 때 약간 확대됨 */
 }
 
-.review_record{
-
-}
 
 .input-group {
     display: flex;
@@ -191,8 +188,6 @@ a{
 .user_information{  /* 리뷰 사용자 정보 입력칸*/
     display: flex;
     width: 390px;
-}
-.review_write{ /* 리뷰 내용 입력칸*/
 }
 
 .review_information{
