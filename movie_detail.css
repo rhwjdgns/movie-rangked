@@ -4,20 +4,9 @@ body{
 .container{
     margin: 0;
     display: grid;
-    grid-template-rows: 200px 800px 700px 500px;
-    grid-template-columns: 600px 400px 400px 300px;
-    gap: 20px 10px;
-    /* grid-template-areas:
-    "top_font . . backbtn"
-    "poster movie_info movie_info actor"
-    "poster movie_info movie_info actor"
-    "poster movie_info movie_info actor"
-    "poster movie_info movie_info actor"
-    "stills stills stills actor"
-    "stills stills stills actor"
-    "stills stills stills actor"
-    "review_input review_input review_input actor" */
-    
+    grid-template-rows: 150px 760px 700px 500px;
+    grid-template-columns: 510px 400px 400px 300px;
+    gap: 40px 30px;
 
 }
 .backbtn{
@@ -25,7 +14,7 @@ body{
     grid-column-start: 4;
     border: none;
     color: black;
-    padding: 10px 20px;
+    padding-top: 50px;
     text-align: center;
     text-decoration: none;
     font-size: 20px;
@@ -41,6 +30,7 @@ body{
     font-weight: 400;
     font-style: normal;
     font-size: 70px;
+    padding-top: 50px;
 }
 .actor_font{
     font-family: "Jua", sans-serif;
