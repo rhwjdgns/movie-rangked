@@ -47,24 +47,27 @@
         </div>
     </div>
     <br>
-    <!-- 리뷰 입력 -->
-    <div class="container review">
-        <div class="review_input">
-            <h1>리뷰 작성하기</h1>
-            <div class="inputs">
-                
-                <div class="input-group mb-3">
-                    <span class="input-group-text">이름</span>
-                    <input id="review_name" type="text" class="form-control" aria-label="Sizing example input"
-                        placeholder="Name" aria-describedby="inputGroup-sizing-default">
+    <!-- 리뷰 -->
+    <div class="container review"><!-- 리뷰 입력과 나열 창-->
+        <div class="review_input"><!-- 리뷰 입력 -->
+            <div class="inputs"><!-- 리뷰 입력 칸-->
+                <h1>리뷰 작성하기</h1>
+                <div class="user_information"> <!-- 리뷰 사용자 입력 칸-->
+                    <div class="input-group mb-3 review_input_name">
+                        <span class="input-group-text">이름</span>
+                        <input id="review_name" type="text" class="form-control" aria-label="Sizing example input"
+                            placeholder="Name" aria-describedby="inputGroup-sizing-default">
+                    </div>
+
+                    <div class="input-group mb-3 review_input_password">
+                        <span class="input-group-text">비번</span>
+                        <input id="review_password" type="password" class="form-control"
+                            aria-label="Sizing example input" placeholder="Password"
+                            aria-describedby="inputGroup-sizing-default">
+                    </div>
                 </div>
 
-                <div class="input-group mb-3">
-                    <span class="input-group-text">비번</span>
-                    <input id="review_password" type="password" class="form-control" aria-label="Sizing example input"
-                        placeholder="Password" aria-describedby="inputGroup-sizing-default">
-                </div>
-                <div class="input-group mb-3">
+                <div class="input-group mb-3 review_write">
                     <span class="input-group-text">내용</span>
                     <input id="review_content" type="text" class="form-control" aria-label="Sizing example input"
                         placeholder="Content" aria-describedby="inputGroup-sizing-default">

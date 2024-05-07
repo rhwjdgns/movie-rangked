@@ -145,12 +145,18 @@ a{
     grid-auto-rows: minmax(100px, auto);
 
 }
-.review_input{
+.review_input{  /* 리뷰 입력칸 모음 */
     max-width: 500px;
-    height: 300px;
+    height: 250px;
     border: 3px solid white;
-    border-radius: 10px;
-    
+    border-radius: 10px; 
+}
+
+.user_information{  /* 리뷰 사용자 정보 입력칸*/
+    display: flex;
+    width: 390px;
+}
+.review_write{ /* 리뷰 내용 입력칸*/
 }
 
 .review_information{
