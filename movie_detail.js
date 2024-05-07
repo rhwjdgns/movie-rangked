@@ -107,8 +107,10 @@ window.onload = function () {
 
             return fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=a9ab6eb8181e52a08229ade55ea0a55e&language=en-US`);
         })
+    make_movie_ranked(movieId);
 
-    make_review(movieId);
+    make_review(movieId); //리로드 때문에 마지막에
+
 
 };
 
@@ -136,12 +138,12 @@ function make_review(movieId) {
         let review_html = `<a class="list-group-item list-group-item-action">
         <div class="review_information">
             <div class="review_name_star">${review_name_write} : ${review_name_star}
-            
+    
             </div>
     
             <div class="dropdown review_edit">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
-                    aria-expanded="false" data-bs-auto-close="outside">
+                <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
+                    data-bs-auto-close="outside">
                     Edit
                 </button>
                 <form class="dropdown-menu p-4" id="${name}review_modify">
@@ -163,9 +165,10 @@ function make_review(movieId) {
                         <label for="re_review_password" class="form-label">비밀번호</label>
                         <input type="password" class="form-control" id="re_review_password" placeholder="Password">
                     </div>
-                    <button id="${name}" onclick="review_modify(this.id)" type="button"
-                        class="btn btn-primary">변경하기</button>
-                    <button id="${name}" onclick="list_del(this.id)" type="button" class="btn btn-primary">삭제하기</button>
+                    <button id="${name}" onclick="review_modify(this.id)" type="button" class="btn btn-danger">변경하기</button>
+                    <button id="${name}" onclick="del_alert(this.id)"type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        삭제하기
+                    </button>
                 </form>
             </div>
         </div>
@@ -218,7 +221,7 @@ function record_review() {
     if (verdict == true) { //리뷰가 이미 있을시 안내 없을 시 저장
         alert("이미 작성한 리뷰가 있습니다.")
     } else {
-        if (name_list == null) {
+        if (name_list == null || name_list == undefined) {
             localStorage.setItem(movieId, review_name + "&" + movieId);
             localStorage.setItem(review_name + "&" + movieId, review_content + "&" + review_password + "&" + review_star);
             localStorage.setItem(movieId + "&star", review_star);
@@ -236,7 +239,7 @@ function record_review() {
 }
 
 function list_del(name_id) { //리스트에서 삭제 함수
-    let input_password = prompt("리뷰작성시 입력한 비밀번호를 입력해 주세요.");
+    let input_password = document.getElementById("del_review_password").value;
 
     if (input_password == localStorage.getItem(name_id).split("&")[1]) {
         let person_movieId = name_id.split("&")[1];
@@ -292,3 +295,64 @@ function review_modify(name_id) { //내용 수정시 함수
     }
 
 }
+
+function del_alert(id) { //삭제 창 영화 id 값 부여 
+    document.querySelector('.del_btn').setAttribute("id", id);
+}
+
+function make_movie_ranked(movieId) { //영화 별점 순서 매기기
+    fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=a9ab6eb8181e52a08229ade55ea0a55e&language=en-US`) //장르 받아오기
+        .then(response => response.json())
+        .then(current_movie => {
+            let movie_star_ranked;
+            let curent_movie_genres = [];
+            current_movie.genres.forEach(curent_movie_genres_id => { curent_movie_genres.push(curent_movie_genres_id.id) });
+
+            fetch(`https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1&api_key=a9ab6eb8181e52a08229ade55ea0a55e`) //영화목록 id와 평점 가져오기
+                .then(response => response.json())
+                .then(data => {
+                    let movie_star = [];
+                    data.results.forEach((movie) => {
+                        let movie_genres = false;
+                        movie.genre_ids.forEach(a => {
+                            if (curent_movie_genres.includes(a) && movie.id != movieId) {
+                                movie_genres = true;
+                            }
+                        })
+
+                        if (movie_genres == true) {
+                            movie_star.push({ "id": movie.id, "vote_average": movie.vote_average, "poster_path": movie.poster_path, "title": movie.title })
+                        }
+                    })
+
+                    movie_star_ranked = movie_star.sort((a, b) => b.vote_average - a.vote_average);
+                    movie_star_ranked = movie_star_ranked.slice(0,5);
+
+                    movie_star_ranked.map((movie, index) => {
+                        let element_movie_ranked = document.getElementById("movie_ranked_list");
+                        let movie_ranked_html = `<li class="list-group-item">
+                        <div class="card mb-3" style="max-width: 540px;">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" class="img-fluid rounded-start"
+                                        alt="...">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h6 class="card-title">${index + 1} : ${movie.title}</h5>
+                                            <p class="card-text">평점 : ${movie.vote_average}</p>
+                                            <button onclick="location.href='movie_details.html?id=${movie.id}'" type="button" class="movie_ranked_btn btn btn-danger btn-sm">상세 정보</button>
+                                    </div>
+                    
+                                </div>
+                    
+                            </div>
+                        </div>
+                    </li>`
+                        element_movie_ranked.innerHTML += movie_ranked_html;
+                    })
+                })
+        })
+}
+
+
