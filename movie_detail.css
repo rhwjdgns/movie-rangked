@@ -1,30 +1,36 @@
 body{
     background-color: rgb(19, 0, 0);  
 }
+.container{
+    margin: 0;
+    display: grid;
+    grid-template-rows: 150px 760px 700px 500px;
+    grid-template-columns: 510px 400px 400px 300px;
+    gap: 40px 80px;
+
+}
 .backbtn{
-    position: absolute;
-    z-index: 0; /* 다른 요소 위에 배치하기 위해 z-index 설정 */
-    top: 20px; /* 위에서 20px 만큼 떨어진 위치에 배치 */
-    right: 20px; /* 오른쪽에서 20px 만큼 떨어진 위치에 배치 */
-    width: 190px;
-    height: 90px;
+    grid-row-start: 1;
+    grid-column-start: 4;
     border: none;
     color: black;
-    padding: 10px 20px;
+    padding-top: 50px;
     text-align: center;
     text-decoration: none;
     font-size: 20px;
-    margin-bottom: 10px;
     transition-duration: 0.4s;
     cursor: pointer;
     border: 3px solid white;
     border-radius: 30px;
 }
 .top_font{
+    grid-row-start: 1;
+    grid-column-start: 1;
     font-family: "Stylish", serif;
     font-weight: 400;
     font-style: normal;
     font-size: 70px;
+    padding-top: 50px;
 }
 .actor_font{
     font-family: "Jua", sans-serif;
@@ -43,27 +49,21 @@ a{
     font-style: normal;
     font-size: 25px;
 }
-.main{
-    display: flex;
-    padding: 10px;
-    width: 100%;
-    margin-top: 60px;
-    height: 650px;
-}
 .poster{
-    width: 402px;
-    height: 600px;
+    grid-row-start: 2;
+    grid-column-start: 1;
     border: 5px solid white;
     border-radius: 10px;
 }
 .img{
     margin-left: 0px;
     display: flex;
-    width: 400px;
-    height: 590px;
 }
 
 .movie_info{
+    grid-row-start: 2;
+    grid-column-start: 2;
+    grid-column-end: span 2;
     font-family: "PT Sans Narrow", sans-serif;
     font-weight: 700;
     font-style: normal;
@@ -71,10 +71,6 @@ a{
     font-size: 28px;
     text-align: left;
     color: white;
-    margin-left: 30px;
-    width: 1000px;
-    min-width: 300px; /* 최소 너비 설정 */
-    height: 600px;
     border: 4px solid white;
     border-radius: 30px;
     overflow: auto;
@@ -98,12 +94,11 @@ a{
 }
 
 .actor{
+    grid-row-start: 2;
+    grid-row-end: span 3;
+    grid-column-start: 4;
     text-align: center;
-    margin-left: 80px;
-    height: 1900px;
     color: white;
-    width: 300px;
-    min-width: 200px; /* 최소 너비 설정 */
     border: 4px solid white;
     border-radius: 20px;
     overflow-y: auto; /* 출연진 목록이 넘칠 때 스크롤 생성 */
@@ -134,10 +129,9 @@ a{
 }
 
 .stills{
-    max-width: 1450px; /* 부모 요소의 최대 너비만큼 stills 요소 크기 제한 */
-    display: flex;
-    flex-direction: column;
-    height: auto;
+    grid-row-start: 3;
+    grid-column-start: 1;
+    grid-column-end: span 3;
     border: 4px solid white;
     border-radius: 20px;
     padding: 10px;
@@ -165,8 +159,10 @@ a{
     margin-right: auto;
 }
 .list-group{
+    grid-row-start: 4;
+    grid-column-start: 2;
+    grid-column-end: span 2;
     max-width: 500px; /* 예시로 너비를 300px로 설정 */
-    display: flex;
 }
 .star{
     max-width: 150px; /* 예시로 너비를 300px로 설정 */
@@ -174,12 +170,9 @@ a{
     margin-right: auto;
 }
 
-.container{
-    display: grid;
-    grid-auto-rows: minmax(100px, auto);
-
-}
 .review_input{  /* 리뷰 입력칸 모음 */
+    grid-row-start: 4;
+    grid-column-start: 1;
     max-width: 500px;
     height: 250px;
     border: 3px solid white;
