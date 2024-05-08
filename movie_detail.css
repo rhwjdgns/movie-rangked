@@ -4,9 +4,9 @@ body{
 .container{
     margin: 0;
     display: grid;
-    grid-template-rows: 150px 760px 700px 500px;
-    grid-template-columns: 510px 400px 400px 300px;
-    gap: 40px 80px;
+    grid-template-rows: 150px 760px 730px 500px;
+    grid-template-columns: 510px 500px 400px 300px;
+    gap: 40px 50px;
 
 }
 .backbtn{
@@ -131,7 +131,7 @@ a{
 .stills{
     grid-row-start: 3;
     grid-column-start: 1;
-    grid-column-end: span 3;
+    grid-column-end: 4;
     border: 4px solid white;
     border-radius: 20px;
     padding: 10px;
@@ -168,22 +168,15 @@ a{
     display: flex;
     margin-right: auto;
 }
-.detail_bottom{
-    display: flex;
-    flex-direction: row;
-    max-width: 70%;
-    justify-content: space-between;
-}
+
 .movie_ranked_box{
-    
+    grid-row-start: 4;
+    grid-column-start: 3;
 }
-.review{
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-}
-.review_box{  /* 리뷰 입력칸 모음 */
-    display: flex;
+
+.review{  /* 리뷰 입력칸 모음 */
+    grid-row-start: 4;
+    grid-column-start: 1;
     justify-content: center;
 }
 
@@ -226,11 +219,9 @@ a{
 .review_information{
     display: flex;
 }
-.review_list_box{
-    display: flex;
-    justify-content: center;
-    max-width: 700px;
-    min-width: 500px;
+.review_list{
+    grid-row-start: 4;
+    grid-column-start: 2;
 }
 .dropdown-menu{
     width: 400px;
